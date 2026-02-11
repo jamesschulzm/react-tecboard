@@ -43,6 +43,10 @@ function App() {
     },
   ];
 
+  function adicionarEvento(evento) {
+    eventos.push(evento);
+  }
+
   return (
     <main>
       <header>
@@ -51,14 +55,16 @@ function App() {
 
       <Banner />
 
-      <FormularioDeEvento temas={temas} />
+      <FormularioDeEvento temas={temas} aoSubmeter={adicionarEvento} />
 
       {temas.map(function (item) {
         return (
           <section key={item.id}>
             <Tema tema={item} />
 
-            <CardEvento evento={eventos[0]} />
+            {eventos.map(function (item, index) {
+              return <CardEvento evento={item} key={index} />;
+            })}
           </section>
         );
       })}
